@@ -3,7 +3,7 @@
 
 . ./env.sh
 
-command="pipenv run artifactory-codeartifact-migrator --artifactoryhost $ARTIFACTORY_HOST --artifactoryprefix $ARTIFACTORY_HOST_PREFIX --artifactoryuser $ARTIFACTORY_USERNAME --artifactorypass $ARTIFACTORY_PASSWORD --codeartifactdomain $CODEARTIFACT_DOMAIN --codeartifactaccount $CODEARTIFACT_ACCOUNT --codeartifactregion $CODEARTIFACT_REGION"
+command="pipenv run artifactory-codeartifact-migrator --artifactoryhost $ARTIFACTORY_HOST --artifactoryprefix $ARTIFACTORY_HOST_PREFIX --artifactoryuser $ARTIFACTORY_USERNAME --artifactorypass $ARTIFACTORY_PASSWORD --codeartifactdomain $CODEARTIFACT_DOMAIN --codeartifactaccount $CODEARTIFACT_ACCOUNT --codeartifactregion $CODEARTIFACT_REGION --source-profile $SOURCE_PROFILE --destination-profile $DESTINATION_PROFILE --destination-domain $DESTINATION_DOMAIN"
 if [ -z $ARTIFACTORY_REPOSITORIES ]; then
   echo "Repositories not defined, will replicate all repositories."
 else

@@ -104,6 +104,18 @@ def getArgs():
     '--packages',
     help = 'Specify packages to replicate from Artifactory. See documentation for appropriate package values. If you specify this argument, you must supply only one repository.'
   )
+  parser.add_argument(
+    '--source-profile',
+    help = 'The source AWS profile to use for authentication.'
+  )
+  parser.add_argument(
+    '--destination-profile',
+    help = 'The destination AWS profile to use for authentication.'
+  )
+  parser.add_argument(
+    '--destination-domain',
+    help = 'The destination CodeArtifact domain.'
+  )
 
   parser.parse_args(sys.argv[1:], namespace=args)
 

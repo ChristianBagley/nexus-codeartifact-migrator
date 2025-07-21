@@ -55,7 +55,7 @@ def codeartifact_list_repositories(client):
     sys.exit(1)
   return response
 
-def codeartifact_check_package_version(args, client, package_dict):
+def codeartifact_check_package_version(args, client, package_dict, source=True):
   """
   codeartifact_check_package_version inspects versions of a package in
   codeartifact and sees if they exist, or are Published status.
@@ -65,6 +65,9 @@ def codeartifact_check_package_version(args, client, package_dict):
   :param package_dict: standard package dictionary to inspect
   :return: int response result
   """
+  domain = args.codeartifactdomain
+  if not source:
+      domain = args.destination_domain
   if package_dict['type'] == 'npm':    
     package_split = package_dict['package'].split('/')
     package = package_split[-1]
@@ -81,7 +84,7 @@ def codeartifact_check_package_version(args, client, package_dict):
   if package_dict.get("namespace"):
     try:
       response = client.describe_package_version(
-          domain=args.codeartifactdomain,
+          domain=domain,
           repository=package_dict.get('repository'),
           format=package_dict.get('type'),
           namespace=package_dict.get("namespace"),
@@ -94,7 +97,7 @@ def codeartifact_check_package_version(args, client, package_dict):
   else:
     try:
       response = client.describe_package_version(
-        domain=args.codeartifactdomain,
+        domain=domain,
         repository=package_dict.get('repository'),
         format=package_dict.get('type'),
         package=package,
